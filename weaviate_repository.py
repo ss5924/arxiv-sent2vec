@@ -1,4 +1,5 @@
 import database
+from logging_config import logger
 
 
 def create_weaviate_schema(class_name: str):
@@ -41,5 +42,12 @@ def create(arxiv_id, chunk, class_name, vector, uuid_str):
 
 
 def chunk_exists(uuid_str: str, class_name: str) -> bool:
-    obj = database.weaviate_client.data_object.get_by_id(uuid_str, class_name=class_name)
-    return obj is not None
+    try:
+        obj = database.weaviate_client.data_object.get_by_id(
+            uuid=uuid_str,
+            class_name=class_name
+        )
+        return obj is not None
+    except Exception as e:
+        logger.error(f"Error checking chunk existence for UUID {uuid_str} in class {class_name}: {e}")
+        return False

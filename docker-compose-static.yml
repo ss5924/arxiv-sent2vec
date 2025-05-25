@@ -1,0 +1,10 @@
+services:
+  arxiv-sent2vec-static:
+    build: .
+    container_name: arxiv-sent2vec-static
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: [ "python", "main.py", "--model", "static-retrieval-mrl-en-v1", "--class", "ArxivChunkStaticRetrieval", "--device", "cpu" ]
