@@ -7,4 +7,4 @@ services:
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
-    command: [ "python", "main.py", "--model", "all-mpnet-base-v2", "--class", "ArxivChunkMiniLML6v2", "--device", "cpu" ]
+    command: [ "python", "main.py", "--model", "all-mpnet-base-v2", "--class", "ArxivChunkMpnetBaseV2", "--device", "cpu" ]
