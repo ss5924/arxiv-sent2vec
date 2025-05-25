@@ -1,0 +1,10 @@
+services:
+  arxiv-sent2vec:
+    build: .
+    container_name: arxiv-sent2vec
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: [ "python", "main.py", "--model", "all-mpnet-base-v2", "--class", "ArxivChunkMiniLML6v2", "--device", "cpu" ]
