@@ -1,5 +1,8 @@
+import logging
+
 import database
-from logging_config import logger
+
+logger = logging.getLogger(__name__)
 
 
 def create_weaviate_schema(class_name: str):

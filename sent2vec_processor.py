@@ -1,10 +1,12 @@
+import logging
 import uuid
 
 from weaviate.util import get_valid_uuid
 
 import weaviate_repository
-from logging_config import logger
 from text_spilt import split_text
+
+logger = logging.getLogger(__name__)
 
 
 async def process_paper(doc, semaphore, class_name, batch_id, model):

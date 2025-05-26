@@ -1,10 +1,18 @@
 services:
   arxiv-sent2vec-static:
     build: .
+    image: arxiv-sent2vec-static:1.0.0
     container_name: arxiv-sent2vec-static
     volumes:
       - ./logs:/app/logs
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
-    command: [ "python", "main.py", "--model", "static-retrieval-mrl-en-v1", "--class", "ArxivChunkStaticRetrieval", "--device", "cpu" ]
+    command: [ "python", "main.py",
+               "--model", "static-retrieval-mrl-en-v1",
+               "--class-name", "ArxivChunkStaticRetrieval",
+               "--device", "cpu",
+               "--logs", "static" ]
+    mem_limit: 1g
+    memswap_limit: 3g
+    cpus: 0.3

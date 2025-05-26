@@ -1,4 +1,5 @@
 import asyncio
+import logging
 
 import logging_config
 import models
@@ -7,15 +8,18 @@ import utils
 import weaviate_repository
 from config import MAX_CONCURRENT_TASKS, BATCH_SIZE
 from database import mongo_collection
-from logging_config import logger
-
-logging_config.setup_logger()
 
 
 async def main():
     args = utils.parse_args()
 
-    logger.info(f"model-name:{args.model_name}, device:{args.device}, class-name{args.class_name}")
+    logging_config.setup_logger(log_name=args.log_name)
+    logger = logging.getLogger(__name__)
+
+    logger.info(
+        "Model name: %s\nDevice: %s\nClass name: %s\nLogs file name: %s",
+        args.model_name, args.device, args.class_name, args.log_name
+    )
 
     model = models.load_model(args.model_name, args.device)
 

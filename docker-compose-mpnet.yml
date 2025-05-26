@@ -1,10 +1,18 @@
 services:
   arxiv-sent2vec-mpnet:
     build: .
+    image: arxiv-sent2vec-mpnet:1.0.0
     container_name: arxiv-sent2vec-mpnet
     volumes:
       - ./logs:/app/logs
     restart: unless-stopped
     environment:
       - PYTHONUNBUFFERED=1
-    command: [ "python", "main.py", "--model", "all-mpnet-base-v2", "--class", "ArxivChunkMpnetBaseV2", "--device", "cpu" ]
+    command: [ "python", "main.py",
+               "--model", "all-mpnet-base-v2",
+               "--class-name", "ArxivChunkMpnetBaseV2",
+               "--device", "cpu",
+               "--logs", "mpnet" ]
+    mem_limit: 1g
+    memswap_limit: 3g
+    cpus: 0.3
